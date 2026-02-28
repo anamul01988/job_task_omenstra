@@ -173,3 +173,88 @@ button {
     ),
     url("https://images.unsplash.com/photo-1558494949-ef010cbdcc4b?auto=format&fit=crop&q=80&w=800");
 }
+
+/* ── Sonar Button Styling ── */
+.c-sonar-button {
+  --d: 5s;
+  --angle: 0deg;
+  --c1: #6473ff;
+  --c2: var(--color-bg);
+  --border-radius: 1000px;
+  background-color: var(--c2);
+  border-radius: var(--border-radius);
+  position: relative;
+  color: white;
+  grid-column-gap: 0.875em;
+  grid-row-gap: 0.875em;
+  justify-content: center;
+  align-items: center;
+  padding: 0.625em 1.25em;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  display: inline-flex;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  overflow: visible;
+}
+
+/* ── Snake/Laser Border Effect (Hover Only) ── */
+.c-sonar-button::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--angle), transparent 75%, #6473ff);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: destination-out;
+  animation: rotateLaser 4s linear infinite;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.c-sonar-button:hover::before {
+  opacity: 1;
+}
+
+/* ── Primary Variant ── */
+.c-sonar-button-primary {
+  background-color: #3448ff;
+}
+
+.c-sonar-button-primary:hover {
+  background-color: #2330aa !important;
+}
+
+[product-size="small"].c-sonar-button {
+  padding: 0.5em 1em;
+  grid-gap: 0.5em; /* Controls gap between text and icon */
+}
+
+.c-button-arrow {
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 0.8125em;
+  height: 0.8125em;
+  display: flex;
+}
+
+.c-sonar-button .c-button-embed {
+  width: 0.5em;
+}
+
+a:active,
+a:hover {
+  outline: 0;
+}

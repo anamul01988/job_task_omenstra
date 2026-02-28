@@ -271,28 +271,24 @@ export default function Navbar() {
 
           {/* ── CTA Buttons (desktop) ── */}
           <div className="hidden lg:flex items-center gap-6 ml-auto flex-shrink-0">
-            {/* Sign In — simple text link */}
-            <a
-              href="#"
-              className="group inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.05em] text-white hover:text-white/80 transition-colors duration-200"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
+            <a href="#" className="c-sonar-button group" product-size="small">
               <span>Sign In</span>
-              <span className="flex items-center transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                <ArrowIcon />
+              <span className="c-button-arrow transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                <div className="c-button-embed">
+                  <ArrowIcon />
+                </div>
               </span>
             </a>
-            {/* Sign Up — primary blue button */}
             <a
               href="#"
-              className="group relative inline-flex items-center gap-2 px-6 py-2.5 rounded-full
-                         text-[11px] font-bold uppercase tracking-[0.05em]
-                         text-white bg-[#3D7FFF] hover:bg-[#2F6EE5] transition-all duration-200 overflow-hidden"
-              style={{ fontFamily: "var(--font-heading)" }}
+              className="c-sonar-button c-sonar-button-primary group"
+              product-size="small"
             >
               <span>Sign Up</span>
-              <span className="flex items-center transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                <ArrowIcon />
+              <span className="c-button-arrow transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                <div className="c-button-embed">
+                  <ArrowIcon />
+                </div>
               </span>
             </a>
           </div>
@@ -400,20 +396,24 @@ export default function Navbar() {
                 {/* Sign In */}
                 <a
                   href="#"
-                  className="flex items-center justify-center gap-2 h-[50px] rounded-full
-                             border border-white/[0.08] text-[14px] font-semibold
-                             text-[#97a3b6] hover:bg-white/[0.05] hover:text-white transition-all duration-200"
+                  className="c-sonar-button group"
+                  product-size="small"
                 >
-                  Sign In
+                  <span>Sign In</span>
+                  <span className="flex items-center transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                    <ArrowIcon />
+                  </span>
                 </a>
                 {/* Sign Up */}
                 <a
                   href="#"
-                  className="btn-laser relative flex items-center justify-center gap-2 h-[50px] rounded-full
-                             bg-[#3448ff] text-[14px] font-semibold text-white overflow-hidden
-                             hover:bg-[#2330aa] transition-colors duration-200"
+                  className="c-sonar-button c-sonar-button-primary group"
+                  product-size="small"
                 >
-                  Sign Up
+                  <span>Sign Up</span>
+                  <span className="flex items-center transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                    <ArrowIcon />
+                  </span>
                 </a>
               </div>
             </div>

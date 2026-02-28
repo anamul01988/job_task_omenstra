@@ -2,8 +2,8 @@
 export function ArrowIcon() {
   return (
     <svg
-      width="13"
-      height="14"
+      width="100%"
+      height="100%"
       viewBox="0 0 13 14"
       fill="none"
       aria-hidden="true"
