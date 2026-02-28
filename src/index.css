@@ -20,9 +20,23 @@
   --color-green: #c3f967;
   --color-blue: #3448ff;
   --color-blue-hover: #2330aa;
-  --navbar-height: 72px;
+  --navbar-height: calc(72 / 16 * 1rem);
   --font-heading: "Montserrat", sans-serif;
   --font-base: "Inter", sans-serif;
+  font-size: 16px;
+}
+
+/* ── Fluid Zoom Effect (768px to 1600px) ── */
+@media screen and (min-width: 768px) and (max-width: 1600px) {
+  :root {
+    font-size: 1vw; /* 16px at 1600px, scales down to 7.68px at 768px */
+  }
+}
+
+@media screen and (min-width: 1601px) {
+  :root {
+    font-size: 16px;
+  }
 }
 
 @layer base {
@@ -194,7 +208,7 @@ button {
   transition: background-color 0.3s;
   display: inline-flex;
   font-family: var(--font-heading);
-  font-size: 11px;
+  font-size: 0.6875rem; /* 11px / 16 */
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;

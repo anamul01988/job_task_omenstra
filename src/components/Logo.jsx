@@ -6,7 +6,7 @@ export default function OmnistraLogo({ isHeaderHovered }) {
       aria-label="Omnistra home"
       className="flex items-center gap-2.5 flex-shrink-0 mr-10 text-white hover:opacity-85 transition-opacity duration-300"
     >
-      <span className="w-7 h-[22px] flex-shrink-0">
+      <span className="w-[1.75rem] h-[1.375rem] flex-shrink-0">
         <svg width="100%" height="100%" viewBox="0 0 31 24" fill="none">
           <path
             fillRule="evenodd"
@@ -18,7 +18,7 @@ export default function OmnistraLogo({ isHeaderHovered }) {
       </span>
       {!isHeaderHovered && (
         <span
-          className="text-[18px] font-bold tracking-[-0.03em] text-white"
+          className="text-[1.125rem] font-bold tracking-[-0.03em] text-white"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           chargeflow

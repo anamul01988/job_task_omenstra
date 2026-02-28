@@ -19,7 +19,7 @@ const menuConfig = [
 // ── Reusable Nav Button ────────────────────────────────────
 function NavButton({ label, onClick, isActive, isLink, href }) {
   const baseStyles =
-    "inline-flex items-center gap-1.5 p-[0.625em] rounded-full text-[11px] font-bold uppercase tracking-[0.05em] transition-all duration-300 whitespace-nowrap relative";
+    "inline-flex items-center gap-[0.375rem] p-[0.625em] rounded-full text-[0.6875rem] font-bold uppercase tracking-[0.05em] transition-all duration-300 whitespace-nowrap relative";
   const activeStyles = isActive
     ? "text-white"
     : "text-[#97a3b6] hover:text-white";
@@ -70,22 +70,41 @@ function ChevronIcon({ isOpen }) {
 }
 
 // ── Mobile accordion section ───────────────────────────────────
+function MobileSeparator() {
+  return (
+    <div className="flex items-center w-full px-[1rem] my-[0.5rem] opacity-20">
+      <div className="w-[0.375rem] h-[0.375rem] rotate-45 bg-white flex-shrink-0" />
+      <div className="flex-1 border-t border-dashed border-white mx-[0.25rem]" />
+      <div className="w-[0.375rem] h-[0.375rem] rotate-45 bg-white flex-shrink-0" />
+    </div>
+  );
+}
+
+// ── Mobile accordion section ───────────────────────────────────
 function MobileSection({ label, children }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="flex flex-col">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center justify-between px-3.5 py-3 text-[14px] font-semibold text-white
-                   rounded-xl transition-colors duration-200 hover:bg-white/[0.05]"
+        className="flex items-center justify-between px-[1rem] py-[0.75rem] text-[0.875rem] font-bold text-white
+                   uppercase tracking-[0.05em] transition-colors duration-200"
       >
         {label}
         <motion.span
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ duration: 0.22 }}
-          className="text-[#677489] text-xs"
+          className="text-white opacity-40"
         >
-          ↓
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <path
+              d="M2 3.5L5 6.5L8 3.5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </motion.span>
       </button>
       <AnimatePresence initial={false}>
@@ -97,7 +116,9 @@ function MobileSection({ label, children }) {
             transition={{ duration: 0.28, ease: [0.19, 1, 0.22, 1] }}
             className="overflow-hidden"
           >
-            <div className="flex flex-col pb-2 px-2">{children}</div>
+            <div className="flex flex-col pb-[0.5rem] px-[1rem] gap-1">
+              {children}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -131,6 +152,17 @@ export default function Navbar() {
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  // Resize effect (Auto-close mobile menu if screen > 768px)
+  useEffect(() => {
+    const handler = () => {
+      if (window.innerWidth >= 768) {
+        setMobileOpen(false);
+      }
+    };
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
   }, []);
 
   // Escape key
@@ -170,10 +202,10 @@ export default function Navbar() {
     <>
       {/* ── Fixed header shell ── */}
       <header
-        className="fixed left-0 right-0 z-[1000] flex items-center justify-center px-6 bg-transparent"
+        className="fixed left-0 right-0 z-[1000] flex items-center justify-center px-[1.5rem] bg-transparent"
         style={{
           top: isPill ? "0.5em" : "0",
-          height: "72px",
+          height: "4.5rem",
           transition: "top 0.8s cubic-bezier(0.19,1,0.22,1)",
         }}
         onMouseEnter={() => setHovered(true)}
@@ -181,15 +213,17 @@ export default function Navbar() {
       >
         {/* ── Navbar inner ── */}
         <div
-          className="flex items-center justify-between w-full h-16 mx-auto"
+          className="flex items-center justify-between w-full h-[4rem] mx-auto"
           style={{
             maxWidth: isPill ? "72.75em" : "90em",
-            padding: isPill ? "0.5em 0.625em" : "0 20px",
+            padding: isPill ? "0.5em 0.625em" : "0 1.25rem",
             background: isPill ? "rgba(0,0,0,0.4)" : "transparent",
-            backdropFilter: isPill ? "blur(15px)" : "none",
-            WebkitBackdropFilter: isPill ? "blur(15px)" : "none",
-            border: isPill ? "1px solid rgba(255,255,255,0.05)" : "none",
-            borderBottom: isPill ? "none" : "1px solid rgba(255,255,255,0.05)",
+            backdropFilter: isPill ? "blur(0.9375rem)" : "none",
+            WebkitBackdropFilter: isPill ? "blur(0.9375rem)" : "none",
+            border: isPill ? "0.0625rem solid rgba(255,255,255,0.05)" : "none",
+            borderBottom: isPill
+              ? "none"
+              : "0.0625rem solid rgba(255,255,255,0.05)",
             borderRadius: isPill ? "1em" : "0",
             boxShadow: isPill ? "0 20px 40px rgba(0,0,0,0.3)" : "none",
             width: isPill ? "calc(100% - 2em)" : "100%",
@@ -201,13 +235,13 @@ export default function Navbar() {
 
           {/* ── Desktop nav menu ── */}
           <nav
-            className="hidden lg:flex items-center gap-1.5 backdrop-blur-[15px]"
+            className="hidden md:flex flex-1 justify-center pointer-events-auto"
             style={{
+              padding: "0",
               background: "rgba(255, 255, 255, 0.1)",
               borderRadius: "6.25em",
               paddingLeft: "0.625em",
               paddingRight: "0.625em",
-              display: "flex",
               position: "absolute",
               left: "50%",
               transform: "translateX(-50%)",
@@ -270,7 +304,7 @@ export default function Navbar() {
           </nav>
 
           {/* ── CTA Buttons (desktop) ── */}
-          <div className="hidden lg:flex items-center gap-6 ml-auto flex-shrink-0">
+          <div className="hidden md:flex items-center gap-[1.5rem] ml-auto flex-shrink-0">
             <a href="#" className="c-sonar-button group" product-size="small">
               <span>Sign In</span>
               <span className="c-button-arrow transition-transform duration-200">
@@ -295,15 +329,19 @@ export default function Navbar() {
 
           {/* ── Hamburger (mobile) ── */}
           <button
-            className="lg:hidden flex flex-col gap-[5px] p-2 ml-auto rounded-lg hover:bg-white/[0.06] transition-colors"
+            className="md:hidden flex flex-col gap-[0.3125rem] p-[0.5rem] ml-auto rounded-[0.5rem] hover:bg-white/[0.06] transition-colors"
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((o) => !o)}
           >
             <motion.span
-              animate={mobileOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+              animate={
+                mobileOpen
+                  ? { rotate: 45, y: "0.4375rem" }
+                  : { rotate: 0, y: 0 }
+              }
               transition={{ duration: 0.22 }}
-              className="block w-5 h-0.5 bg-[#97a3b6] rounded-full origin-center"
+              className="block w-5 h-0.5 bg-white rounded-full origin-center"
             />
             <motion.span
               animate={
@@ -312,14 +350,16 @@ export default function Navbar() {
                   : { opacity: 1, scaleX: 1 }
               }
               transition={{ duration: 0.22 }}
-              className="block w-5 h-0.5 bg-[#97a3b6] rounded-full"
+              className="block w-5 h-0.5 bg-white rounded-full"
             />
             <motion.span
               animate={
-                mobileOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }
+                mobileOpen
+                  ? { rotate: -45, y: "-0.4375rem" }
+                  : { rotate: 0, y: 0 }
               }
               transition={{ duration: 0.22 }}
-              className="block w-5 h-0.5 bg-[#97a3b6] rounded-full origin-center"
+              className="block w-5 h-0.5 bg-white rounded-full origin-center"
             />
           </button>
         </div>
@@ -329,92 +369,126 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: "-1.25rem" }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
+            exit={{ opacity: 0, y: "-1.25rem" }}
             transition={{ duration: 0.3, ease: [0.19, 1, 0.22, 1] }}
-            className="fixed left-0 right-0 bottom-0 z-[180] overflow-y-auto lg:hidden"
+            className="fixed inset-0 z-[2000] overflow-y-auto bg-black"
             style={{
-              top: "72px",
-              background: "rgba(0,0,0,0.95)",
-              backdropFilter: "blur(32px)",
-              WebkitBackdropFilter: "blur(32px)",
-              borderTop: "1px solid rgba(255,255,255,0.08)",
-              WebkitOverflowScrolling: "touch",
+              backdropFilter: "blur(2rem)",
+              WebkitBackdropFilter: "blur(2rem)",
             }}
             aria-hidden={!mobileOpen}
           >
-            <div className="flex flex-col gap-1 p-4">
-              {/* Product */}
-              <MobileSection label="Product">
-                {["Prevent", "Automation", "Alerts", "Insights", "Connect"].map(
-                  (l) => (
-                    <a
-                      key={l}
-                      href="#"
-                      className="block px-3.5 py-2.5 text-[14px] font-medium text-[#97a3b6] rounded-xl
-                               hover:bg-white/[0.05] hover:text-white transition-all duration-200
-                               hover:pl-[18px]"
-                    >
-                      {l}
-                    </a>
-                  ),
-                )}
-              </MobileSection>
+            <div className="flex flex-col min-h-screen px-[1.5rem] py-[1.5rem] relative">
+              {/* Internal Header for mobile menu */}
+              <div className="flex items-center justify-between mb-[2rem]">
+                <Logo isHeaderHovered={true} />{" "}
+                {/* Pass true to only show the icon */}
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="w-[2rem] h-[2rem] flex items-center justify-center text-white"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M18 6L6 18M6 6L18 18"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
 
-              {/* Simple menus */}
-              {simpleMenus.map((menu) => (
-                <MobileSection key={menu.id} label={menu.label}>
-                  {menu.links.map((l) => (
+              {/* Mobile CTAs (Top position as per image) */}
+              <div className="flex items-center justify-between gap-[1rem] mb-[1.5rem]">
+                <a
+                  href="#"
+                  className="c-sonar-button flex-1 group"
+                  product-size="small"
+                  style={{ justifyContent: "center" }}
+                >
+                  <span>Sign In</span>
+                  <span className="c-button-arrow">
+                    <div className="c-button-embed">
+                      <ArrowIcon />
+                    </div>
+                  </span>
+                </a>
+                <a
+                  href="#"
+                  className="c-sonar-button c-sonar-button-primary flex-1 group"
+                  product-size="small"
+                  style={{ justifyContent: "center" }}
+                >
+                  <span>Sign Up</span>
+                  <span className="c-button-arrow">
+                    <div className="c-button-embed">
+                      <ArrowIcon />
+                    </div>
+                  </span>
+                </a>
+              </div>
+
+              <MobileSeparator />
+
+              {/* Navigation Links */}
+              <div className="flex flex-col">
+                <MobileSection label="Product">
+                  {[
+                    "Prevent",
+                    "Automation",
+                    "Alerts",
+                    "Insights",
+                    "Connect",
+                  ].map((l) => (
                     <a
                       key={l}
                       href="#"
-                      className="block px-3.5 py-2.5 text-[14px] font-medium text-[#97a3b6] rounded-xl
-                                 hover:bg-white/[0.05] hover:text-white transition-all duration-200
-                                 hover:pl-[18px]"
+                      className="block px-[1rem] py-[0.5rem] text-[0.8125rem] font-medium text-[#97a3b6] uppercase tracking-[0.05em] hover:text-white"
                     >
                       {l}
                     </a>
                   ))}
                 </MobileSection>
-              ))}
+                <MobileSeparator />
 
-              {/* Pricing */}
-              <a
-                href="#"
-                className="px-3.5 py-3 text-[14px] font-semibold text-white rounded-xl
-                           hover:bg-white/[0.05] transition-colors duration-200"
-              >
-                Pricing
-              </a>
+                {simpleMenus.map((menu) => (
+                  <div key={menu.id}>
+                    <MobileSection label={menu.label}>
+                      {menu.links.map((l) => (
+                        <a
+                          key={l}
+                          href="#"
+                          className="block px-[1rem] py-[0.5rem] text-[0.8125rem] font-medium text-[#97a3b6] uppercase tracking-[0.05em] hover:text-white"
+                        >
+                          {l}
+                        </a>
+                      ))}
+                    </MobileSection>
+                    <MobileSeparator />
+                  </div>
+                ))}
 
-              {/* Mobile CTAs */}
-              <div
-                className="flex flex-col gap-3 pt-6 pb-6 px-3.5 mt-3"
-                style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
-              >
-                {/* Sign In */}
                 <a
                   href="#"
-                  className="c-sonar-button group"
-                  product-size="small"
+                  className="flex items-center justify-between px-[1rem] py-[0.75rem] text-[0.875rem] font-bold text-white uppercase tracking-[0.05em]"
                 >
-                  <span>Sign In</span>
-                  <span className="flex items-center transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                    <ArrowIcon />
+                  Pricing
+                  <span className="text-white opacity-40">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                      <path
+                        d="M2 3.5L5 6.5L8 3.5"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                   </span>
                 </a>
-                {/* Sign Up */}
-                <a
-                  href="#"
-                  className="c-sonar-button c-sonar-button-primary group"
-                  product-size="small"
-                >
-                  <span>Sign Up</span>
-                  <span className="flex items-center transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                    <ArrowIcon />
-                  </span>
-                </a>
+                <MobileSeparator />
               </div>
             </div>
           </motion.div>
