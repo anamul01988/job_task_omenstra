@@ -245,13 +245,13 @@ button {
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  width: 0.8125em;
-  height: 0.8125em;
+  width: 1em; /* Doubled from 0.8125em */
+  height: 1em; /* Doubled from 0.8125em */
   display: flex;
 }
 
 .c-sonar-button .c-button-embed {
-  width: 0.5em;
+  width: 0.8em; /* Doubled from 0.5em */
 }
 
 a:active,

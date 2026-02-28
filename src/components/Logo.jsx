@@ -1,5 +1,5 @@
 // Omnistra brand logo SVG
-export default function OmnistraLogo() {
+export default function OmnistraLogo({ isHeaderHovered }) {
   return (
     <a
       href="/"
@@ -16,12 +16,14 @@ export default function OmnistraLogo() {
           />
         </svg>
       </span>
-      <span
-        className="text-[18px] font-bold tracking-[-0.03em] text-white"
-        style={{ fontFamily: "var(--font-heading)" }}
-      >
-        chargeflow
-      </span>
+      {!isHeaderHovered && (
+        <span
+          className="text-[18px] font-bold tracking-[-0.03em] text-white"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
+          chargeflow
+        </span>
+      )}
     </a>
   );
 }

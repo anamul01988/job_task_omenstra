@@ -197,7 +197,7 @@ export default function Navbar() {
           }}
         >
           {/* Logo */}
-          <Logo />
+          <Logo isHeaderHovered={hovered} />
 
           {/* ── Desktop nav menu ── */}
           <nav
@@ -273,7 +273,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-6 ml-auto flex-shrink-0">
             <a href="#" className="c-sonar-button group" product-size="small">
               <span>Sign In</span>
-              <span className="c-button-arrow transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              <span className="c-button-arrow transition-transform duration-200">
                 <div className="c-button-embed">
                   <ArrowIcon />
                 </div>
@@ -285,7 +285,7 @@ export default function Navbar() {
               product-size="small"
             >
               <span>Sign Up</span>
-              <span className="c-button-arrow transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              <span className="c-button-arrow transition-transform duration-200">
                 <div className="c-button-embed">
                   <ArrowIcon />
                 </div>
