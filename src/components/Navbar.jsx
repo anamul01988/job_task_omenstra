@@ -228,8 +228,8 @@ export default function Navbar() {
         <div
           className="flex items-center justify-between w-full h-[4rem] mx-auto"
           style={{
-            maxWidth: isPill ? "72.75em" : "90em",
-            padding: isPill ? "0.5em 0.625em" : "0 1.25rem",
+            maxWidth: isPill ? "80em" : "100em",
+            padding: isPill ? "0.5em 0.625em" : "0 1rem",
             background: isPill ? "rgba(0,0,0,0.4)" : "transparent",
             backdropFilter: isPill ? "blur(0.9375rem)" : "none",
             WebkitBackdropFilter: isPill ? "blur(0.9375rem)" : "none",
