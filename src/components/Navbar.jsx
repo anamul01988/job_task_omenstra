@@ -4,7 +4,7 @@ import Logo from "./Logo";
 import ProductDropdown from "./ProductDropdown";
 import SimpleDropdown from "./SimpleDropdown";
 import { ArrowIcon } from "./ArrowIcon";
-import { simpleMenus } from "../data/navData";
+import { productItems, simpleMenus } from "../data/navData";
 
 // ── Shared Menu Configuration ───────────────────────────────
 const menuConfig = [
@@ -124,6 +124,19 @@ function MobileSection({ label, children }) {
       </AnimatePresence>
     </div>
   );
+}
+
+// Helper component for badges in product cards
+function MobileTag({ tag }) {
+  if (!tag) return null;
+  const base =
+    "inline-flex items-center px-[0.5rem] py-[0.1875rem] rounded-full text-[0.625rem] font-bold tracking-[0.05em] uppercase";
+  const styles = {
+    white: `${base} bg-white text-black`,
+    green: `${base} bg-[#c3f967] text-black`,
+    dim: `${base} bg-white/10 text-[#888] border border-white/10`,
+  };
+  return <span className={styles[tag.style] ?? styles.green}>{tag.label}</span>;
 }
 
 // ── Main Navbar ────────────────────────────────────────────────
@@ -436,21 +449,29 @@ export default function Navbar() {
               {/* Navigation Links */}
               <div className="flex flex-col">
                 <MobileSection label="Product">
-                  {[
-                    "Prevent",
-                    "Automation",
-                    "Alerts",
-                    "Insights",
-                    "Connect",
-                  ].map((l) => (
-                    <a
-                      key={l}
-                      href="#"
-                      className="block px-[1rem] py-[0.5rem] text-[0.8125rem] font-medium text-[#97a3b6] uppercase tracking-[0.05em] hover:text-white"
-                    >
-                      {l}
-                    </a>
-                  ))}
+                  <div className="c-nav-mobile-drop_inner">
+                    {productItems.map((item) => (
+                      <a
+                        key={item.id}
+                        href={`/products/${item.id}`}
+                        className="c-nav_menu-link cc-mobile"
+                      >
+                        <img
+                          loading="eager"
+                          src={item.imgUrl}
+                          alt={item.title}
+                          className={`c-nav_menu-link_img cc-mobile cc-${item.id}`}
+                        />
+                        <div className="c-nav_menu-link_title-wrapper">
+                          <div className="c-text-2">{item.title}</div>
+                          <MobileTag tag={item.tag} />
+                        </div>
+                        <div className="c-nav_menu-link_text-wrapper">
+                          <div className="c-text-3">{item.desc}</div>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
                 </MobileSection>
                 <MobileSeparator />
 

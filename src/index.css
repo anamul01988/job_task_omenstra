@@ -268,6 +268,89 @@ button {
   width: 0.8em; /* Doubled from 0.5em */
 }
 
+/* ── Mobile Product Cards ── */
+.c-nav-mobile-drop_inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 1rem;
+}
+
+.c-nav_menu-link.cc-mobile {
+  background-color: #1a1a1a;
+  background-image: linear-gradient(221deg, #161616, #0b0b0b 98%);
+  border-radius: 0.88em;
+  padding: 1.25em;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  height: 8.5em;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.c-nav_menu-link.cc-mobile:hover {
+  background-color: #222;
+}
+
+.c-nav_menu-link_img.cc-mobile {
+  position: absolute;
+  right: -7em;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  filter: saturate(0%);
+  opacity: 0.4;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.c-nav_menu-link.cc-mobile:hover .c-nav_menu-link_img.cc-mobile {
+  filter: saturate(100%);
+  opacity: 0.8;
+  transform: translateX(-0.5rem);
+}
+
+.c-nav_menu-link_img.cc-mobile.cc-prevent {
+  right: -5em;
+  width: 70%;
+  object-position: 50% 63%;
+}
+
+.c-nav_menu-link_img.cc-mobile.cc-connect {
+  right: -4em;
+}
+
+.c-text-2 {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  position: relative;
+  z-index: 2;
+  letter-spacing: -0.02em;
+}
+
+.c-text-3 {
+  font-family: var(--font-base);
+  font-size: 0.8125rem;
+  color: #888;
+  line-height: 1.4;
+  max-width: 65%;
+  position: relative;
+  z-index: 2;
+}
+
+.c-nav_menu-link_title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 a:active,
 a:hover {
   outline: 0;
