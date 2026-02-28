@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap");
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+:root {
+  --color-bg: #000000;
+  --color-surface: rgba(10, 10, 10, 0.7);
+  --color-surface-2: #1a1a1a;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-bright: rgba(255, 255, 255, 0.15);
+  --color-text: #ffffff;
+  --color-text-muted: #97a3b6;
+  --color-text-dim: #677489;
+  --color-green: #c3f967;
+  --color-blue: #3448ff;
+  --color-blue-hover: #2330aa;
+  --navbar-height: 72px;
+  --font-heading: "Montserrat", sans-serif;
+  --font-base: "Inter", sans-serif;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+}
+
+/* ── Laser border animation for primary button ── */
+@keyframes rotateLaser {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
+
+.btn-laser::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--angle), transparent 80%, #6473ff);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: destination-out;
+  animation: rotateLaser 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-laser:hover::before {
+  opacity: 1;
+}
+
+/* ── Pulse dot animation ── */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.7);
+  }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease infinite;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-dim);
+}
+
+/* ── Rich dropdown images ── */
+.dropdown-img-prevent {
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(30, 60, 150, 0.3) 0%,
+      transparent 70%
+    ),
+    url("https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=800");
+}
+.dropdown-img-automation {
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(30, 150, 100, 0.3) 0%,
+      transparent 70%
+    ),
+    url("https://images.unsplash.com/photo-1620712943543-bcc463867000?auto=format&fit=crop&q=80&w=800");
+}
+.dropdown-img-alerts {
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(150, 30, 30, 0.3) 0%,
+      transparent 70%
+    ),
+    url("https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&q=80&w=800");
+}
+.dropdown-img-insights {
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(150, 150, 30, 0.3) 0%,
+      transparent 70%
+    ),
+    url("https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800");
+}
+.dropdown-img-connect {
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(100, 30, 150, 0.3) 0%,
+      transparent 70%
+    ),
+    url("https://images.unsplash.com/photo-1558494949-ef010cbdcc4b?auto=format&fit=crop&q=80&w=800");
+}
