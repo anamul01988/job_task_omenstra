@@ -1,4 +1,3 @@
-// Omnistra brand logo SVG
 export default function OmnistraLogo({ isHeaderHovered }) {
   return (
     <a
